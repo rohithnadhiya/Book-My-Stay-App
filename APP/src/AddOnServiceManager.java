@@ -8,19 +8,36 @@ public class AddOnServiceManager {
         servicesByReservation = new HashMap<>();
     }
 
-    // Add service to a reservation
     public void addService(String reservationId, AddOnService service) {
 
         servicesByReservation
                 .computeIfAbsent(reservationId, k -> new ArrayList<>())
                 .add(service);
-    }
-    // Calculate total add-on cost
-    public double calculateTotalServiceCost(String reservationId) {
 
-        double total = 0;
+        System.out.println(service.getServiceName() + " added for " + reservationId);
+    }
+
+    public void displayServices(String reservationId) {
 
         List<AddOnService> services = servicesByReservation.get(reservationId);
+
+        if (services == null || services.isEmpty()) {
+            System.out.println("No add-ons selected.");
+            return;
+        }
+
+        System.out.println("Services for Reservation " + reservationId + ":");
+
+        for (AddOnService s : services) {
+            System.out.println("- " + s.getServiceName() + " : ₹" + s.getCost());
+        }
+    }
+
+    public double calculateTotalServiceCost(String reservationId) {
+
+        List<AddOnService> services = servicesByReservation.get(reservationId);
+
+        double total = 0;
 
         if (services != null) {
             for (AddOnService s : services) {

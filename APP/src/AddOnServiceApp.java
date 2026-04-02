@@ -8,18 +8,21 @@ public class AddOnServiceApp {
 
         String reservationId = "Single-1";
 
-        // Create services
         AddOnService breakfast = new AddOnService("Breakfast", 500);
         AddOnService spa = new AddOnService("Spa", 1000);
+        AddOnService wifi = new AddOnService("WiFi", 200);
 
-        // Attach services
         manager.addService(reservationId, breakfast);
         manager.addService(reservationId, spa);
+        manager.addService(reservationId, wifi);
 
-        // Calculate total
+        System.out.println();
+
+        manager.displayServices(reservationId);
+
         double total = manager.calculateTotalServiceCost(reservationId);
 
-        System.out.println("Reservation ID: " + reservationId);
-        System.out.println("Total Add-On Cost: " + total);
+        System.out.println("\nReservation ID: " + reservationId);
+        System.out.println("Total Add-On Cost: ₹" + total);
     }
 }
