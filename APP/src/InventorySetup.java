@@ -1,45 +1,29 @@
-/**
- * ================================================================
- * MAIN CLASS – InventorySetup
- * ================================================================
- *
- * Use Case 3: Centralized Room Inventory Management
- *
- * Demonstrates centralized inventory usage.
- *
- * @version 3.0
- */
-
 public class InventorySetup {
 
     public static void main(String[] args) {
 
-        System.out.println("Hotel Room Inventory Status\n");
-
-        // Room objects
-        Room single = new SingleRoom();
-        Room dbl = new DoubleRoom();
-        Room suite = new SuiteRoom();
-
-        // Inventory
         RoomInventory inventory = new RoomInventory();
+
+        SingleRoom single = new SingleRoom();
+        DoubleRoom dbl = new DoubleRoom();
+        SuiteRoom suite = new SuiteRoom();
 
         // Display Single
         System.out.println("Single Room:");
         single.displayRoomDetails();
         System.out.println("Available Rooms: " +
-                inventory.getRoomAvailability().get("Single") + "\n");
+                (inventory.isAvailable("Single") ? "Yes" : "No"));
 
         // Display Double
-        System.out.println("Double Room:");
+        System.out.println("\nDouble Room:");
         dbl.displayRoomDetails();
         System.out.println("Available Rooms: " +
-                inventory.getRoomAvailability().get("Double") + "\n");
+                (inventory.isAvailable("Double") ? "Yes" : "No"));
 
         // Display Suite
-        System.out.println("Suite Room:");
+        System.out.println("\nSuite Room:");
         suite.displayRoomDetails();
         System.out.println("Available Rooms: " +
-                inventory.getRoomAvailability().get("Suite"));
+                (inventory.isAvailable("Suite") ? "Yes" : "No"));
     }
 }

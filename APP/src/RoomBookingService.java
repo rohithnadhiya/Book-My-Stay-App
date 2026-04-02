@@ -4,20 +4,16 @@ public class RoomBookingService {
 
     public void bookRoom(RoomInventory inventory, String roomType) {
 
-        Map<String, Integer> availability = inventory.getRoomAvailability();
-
-        if (!availability.containsKey(roomType)) {
-            System.out.println("Invalid room type!");
+        // Check availability
+        if (!inventory.isAvailable(roomType)) {
+            System.out.println(roomType + " room is not available!");
             return;
         }
 
-        int count = availability.get(roomType);
+        // Reduce inventory
+        inventory.decrement(roomType);
 
-        if (count > 0) {
-            availability.put(roomType, count - 1);
-            System.out.println(roomType + " room booked successfully!");
-        } else {
-            System.out.println(roomType + " room is not available!");
-        }
+        // Confirm booking
+        System.out.println(roomType + " room booked successfully!");
     }
 }

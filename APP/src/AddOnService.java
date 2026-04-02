@@ -11,6 +11,7 @@ public class AddOnService {
     public String getServiceName() {
         return serviceName;
     }
+
     public double getCost() {
         return cost;
     }
