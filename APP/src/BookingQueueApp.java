@@ -1,31 +1,24 @@
+import java.util.*;
+
 public class BookingQueueApp {
 
     public static void main(String[] args) {
 
-        System.out.println("Booking Request Queue\n");
+        Queue<Reservation> queue = new LinkedList<>();
 
-        BookingRequestQueue bookingQueue = new BookingRequestQueue();
+        // Sample bookings
+        queue.add(new Reservation("Abhi", "Single"));
+        queue.add(new Reservation("Subha", "Single"));
+        queue.add(new Reservation("Vamshi", "Suite"));
 
-        // Create requests
-        Reservation r1 = new Reservation("Abhi", "Single");
-        Reservation r2 = new Reservation("Subha", "Double");
-        Reservation r3 = new Reservation("Tamilini", "Suite");
+        RoomInventory inventory = new RoomInventory();
+        RoomAllocationService allocationService = new RoomAllocationService();
 
-        // Add to queue
-        bookingQueue.addRequest(r1);
-        bookingQueue.addRequest(r2);
-        bookingQueue.addRequest(r3);
+        System.out.println("Room Allocation Processing\n");
 
-        // Process queue (FIFO)
-        while (bookingQueue.hasPendingRequests()) {
-            Reservation r = bookingQueue.getNextRequest();
-
-            System.out.println(
-                    "Processing booking for Guest: "
-                            + r.getGuestName()
-                            + ", Room Type: "
-                            + r.getRoomType()
-            );
+        while (!queue.isEmpty()) {
+            Reservation reservation = queue.poll();
+            allocationService.allocate(inventory, reservation);
         }
     }
 }
